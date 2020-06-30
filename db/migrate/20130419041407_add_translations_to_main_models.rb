@@ -11,8 +11,7 @@ class AddTranslationsToMainModels < SpreeExtension::Migration[4.2]
 
     unless table_exists?(:spree_taxon_translations)
       params = { name: :string, description: :text, meta_title: :string,
-                 meta_description: :string, meta_keywords: :string,
-                 permalink: :string }
+                 meta_description: :string, meta_keywords: :string}
       Spree::Taxon.create_translation_table!(params, { migrate_data: true })
     end
   end
