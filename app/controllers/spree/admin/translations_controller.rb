@@ -29,6 +29,10 @@ module Spree
       @klass ||= "Spree::#{params[:resource].classify}".constantize
     end
 
+    def resource
+      @resource ||= klass.find(params[:resource_id])
+    end
+
     def collection_url
       ActionController::Routing::Routes.recognize_path("admin_#{resource_name}_url", @resource)
       send "admin_#{resource_name}_url", @resource
