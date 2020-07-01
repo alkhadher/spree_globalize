@@ -29,23 +29,11 @@ module Spree
       @klass ||= "Spree::#{params[:resource].classify}".constantize
     end
 
-    def resource
-      @resource ||= if slugged_models.include? klass.class_name
-        klass.friendly.find(params[:resource_id])
-      else
-        klass.find(params[:resource_id])
-      end
-    end
-
     def collection_url
       ActionController::Routing::Routes.recognize_path("admin_#{resource_name}_url", @resource)
       send "admin_#{resource_name}_url", @resource
     rescue
       send "edit_admin_#{resource_name}_url", @resource
-    end
-
-    def slugged_models
-      ["SpreeProduct"]
     end
   end
 end
